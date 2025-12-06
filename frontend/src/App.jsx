@@ -93,8 +93,9 @@ function App() {
         method: "DELETE",
       });
 
-      if (!response.ok && response.status !== 204)
+      if (!response.ok && response.status !== 204) {
         throw new Error(`Delete failed: ${response.status}`);
+      }
 
       setTasks((prev) => prev.filter((task) => task.id !== taskId));
     } catch (err) {
@@ -103,31 +104,17 @@ function App() {
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      {/* Outer centered container */}
-      <div
-        style={{
-          maxWidth: "400px",
-          margin: "0 auto",
-        }}
-      >
+    <div className="app-root">
+      <div className="app-container">
         <h1>Task Tracker Pro</h1>
         <p>React frontend + Django REST API backend.</p>
 
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {error && <p className="error-text">Error: {error}</p>}
 
         {/* Add Task Form */}
-        <section style={{ marginTop: "1.5rem", marginBottom: "2rem" }}>
+        <section>
           <h2>Add a new task</h2>
-          <form
-            onSubmit={handleAddTask}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              maxWidth: "400px", // matches layout width
-            }}
-          >
+          <form onSubmit={handleAddTask}>
             <label>
               Title:
               <input
@@ -155,7 +142,9 @@ function App() {
               />
             </label>
 
-            <button type="submit">Add Task</button>
+            <button type="submit" className="btn primary-btn">
+              Add Task
+            </button>
           </form>
         </section>
 
@@ -168,43 +157,40 @@ function App() {
           {!loading && tasks.length === 0 && <p>No tasks yet.</p>}
 
           {!loading && tasks.length > 0 && (
-            <ul style={{ listStyle: "none", padding: 0 }}>
+            <ul className="task-list">
               {tasks.map((task) => (
-                <li key={task.id} style={{ marginBottom: "1rem" }}>
-                  {/* Card Container */}
-                  <div
-                    style={{
-                      backgroundColor: "#ffffff",
-                      padding: "1rem",
-                      border: "1px solid #ddd",
-                      borderRadius: "6px",
-                      maxWidth: "400px",
-                    }}
-                  >
-                    <div>
-                      <strong>{task.title}</strong>{" "}
+                <li key={task.id} className="task-item">
+                  <div className="task-card">
+                    <div className="task-title-row">
+                      <span className="task-title">{task.title}</span>
                       {task.completed && (
-                        <span style={{ color: "green" }}>(Completed)</span>
+                        <span className="task-status-completed">Completed</span>
                       )}
                     </div>
-                    <div>{task.description}</div>
-                    <small>
-                      Due: {task.due_date} | Completed:{" "}
-                      {task.completed ? "Yes" : "No"}
-                    </small>
 
-                    {/* Buttons */}
-                    <div style={{ marginTop: "0.5rem" }}>
+                    <div className="task-description">{task.description}</div>
+
+                    <div className="task-meta">
+                      Due: {task.due_date} · Completed:{" "}
+                      {task.completed ? "Yes" : "No"}
+                    </div>
+
+                    <div className="task-buttons">
                       <button
+                        type="button"
+                        className="btn toggle-btn"
                         onClick={() =>
                           handleToggleComplete(task.id, task.completed)
                         }
-                        style={{ marginRight: "0.5rem" }}
                       >
                         {task.completed ? "Mark Incomplete" : "Mark Complete"}
                       </button>
 
-                      <button onClick={() => handleDeleteTask(task.id)}>
+                      <button
+                        type="button"
+                        className="btn delete-btn"
+                        onClick={() => handleDeleteTask(task.id)}
+                      >
                         Delete
                       </button>
                     </div>

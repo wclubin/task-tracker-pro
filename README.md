@@ -1,6 +1,6 @@
 # Task Tracker Pro
 
-Task Tracker Pro is a small full-stack web application built to demonstrate modern software development skills for job applications.
+Task Tracker Pro is a small full-stack web application built to demonstrate modern software development skills for my job applications.
 
 It uses:
 
@@ -114,5 +114,5 @@ http://localhost:5173/
 - Running a two-service development environment
 - Understanding how frontend and backend communicate via REST
 
-This project is intentionally small but realistic, and is suitable for inclusion in a developer portfolio or as a talking point in technical interviews.
+This project is intentionally small but realistic, and is suitable for inclusion in my developer portfolio or as a talking point in technical interviews.
 
